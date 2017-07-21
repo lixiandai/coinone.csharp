@@ -7,4 +7,8 @@
     <RootNamespace>Bithumb.Sample</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\coinone.api.s16\coinone.api.s16.csproj" />
+  </ItemGroup>
+
 </Project>
