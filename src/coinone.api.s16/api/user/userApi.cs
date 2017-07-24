@@ -42,13 +42,72 @@ namespace XCT.BaseLib.API.CoinOne.User
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<UserDailyBalance> DailyBalance()
+        {
+            return await UserClient.CallApiPostAsync<UserDailyBalance>("/v2/account/daily_balance");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<UserInfo> UserInfor()
+        {
+            return await UserClient.CallApiPostAsync<UserInfo>("/v2/account/user_info");
+        }
+
+        /// <summary>
         /// Transaction_V2 - 2-Factor Authentication
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public async Task<AuthNumber> AuthNumber(string type = "krw")
+        public async Task<UserAuthNumber> AuthNumber(string type = "btc")
         {
-            return await UserClient.CallApiPostAsync<AuthNumber>("/v2/transaction/auth_number/");
+            var _params = new Dictionary<string, object>();
+            {
+                _params.Add("type", type);
+            }
+
+            return await UserClient.CallApiPostAsync<UserAuthNumber>("/v2/transaction/auth_number/", _params);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currency"></param>
+        /// <param name="address"></param>
+        /// <param name="auth_number"></param>
+        /// <param name="qty"></param>
+        /// <returns></returns>
+        public async Task<UserAuthNumber> SendCoin(string currency, string address, int auth_number, decimal qty)
+        {
+            var _params = new Dictionary<string, object>();
+            {
+                _params.Add("currency", currency);
+                _params.Add("address", address);
+                _params.Add("auth_number", auth_number);
+                _params.Add("qty", qty);
+            }
+
+            return await UserClient.CallApiPostAsync<UserAuthNumber>("/v2/transaction/coin/", _params);
+        }
+
+        /// <summary>
+        /// Coin Transactions History
+        /// </summary>
+        /// <param name="currency">Currency. Allowed values: btc, eth, etc</param>
+        /// <returns></returns>
+        public async Task<UserHistory> History(string currency = "btc")
+        {
+            var _params = new Dictionary<string, object>();
+            {
+                _params.Add("currency", currency);
+            }
+
+            return await UserClient.CallApiPostAsync<UserHistory>("/v2/transaction/history/", _params);
         }
     }
 }

@@ -20,6 +20,16 @@ namespace XCT.BaseLib.API.CoinOne.Public
             }
         }
 
+        public async Task<PublicCurrency> Currency(string currencyType = "KRW")
+        {
+            var _params = new Dictionary<string, object>();
+            {
+                _params.Add("currencyType", currencyType);
+            }
+
+            return await PublicClient.CallApiGetAsync<PublicCurrency>("/currency", _params);
+        }
+
         /// <summary>
         /// Public - Orderbook
         /// </summary>
@@ -32,7 +42,7 @@ namespace XCT.BaseLib.API.CoinOne.Public
                 _params.Add("currency", currency);
             }
 
-            return await PublicClient.CallApiGetAsync<PublicOrderBook>($"/orderbook", _params);
+            return await PublicClient.CallApiGetAsync<PublicOrderBook>("/orderbook", _params);
         }
 
         /// <summary>
@@ -47,7 +57,7 @@ namespace XCT.BaseLib.API.CoinOne.Public
                 _params.Add("currency", currency);
             }
 
-            return await PublicClient.CallApiGetAsync<PublicTicker>($"/ticker", _params);
+            return await PublicClient.CallApiGetAsync<PublicTicker>("/ticker", _params);
         }
 
         /// <summary>
@@ -61,7 +71,7 @@ namespace XCT.BaseLib.API.CoinOne.Public
                 _params.Add("currency", "all");
             }
 
-            return await PublicClient.CallApiGetAsync<PublicTickerAll>($"/ticker", _params);
+            return await PublicClient.CallApiGetAsync<PublicTickerAll>("/ticker", _params);
         }
 
         /// <summary>
@@ -78,7 +88,7 @@ namespace XCT.BaseLib.API.CoinOne.Public
                 _params.Add("period", period);
             }
 
-            return await PublicClient.CallApiGetAsync<PublicTrades>($"/trades", _params);
+            return await PublicClient.CallApiGetAsync<PublicTrades>("/trades", _params);
         }
     }
 }

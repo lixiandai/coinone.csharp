@@ -2,7 +2,7 @@
 
 namespace XCT.BaseLib.API.CoinOne.User
 {
-    public class AuthNumber : CApiResult
+    public class UserAuthNumber : CApiResult
     {
         /// <summary>
         /// 

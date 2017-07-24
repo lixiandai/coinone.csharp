@@ -104,20 +104,93 @@ namespace XCT.BaseLib.API.CoinOne.User
             switch (coin_name.ToUpper())
             {
                 case "BTC":
-                    _result = this.btc.avail;
+                    if (this.btc != null)
+                        _result = this.btc.avail;
                     break;
                 case "ETH":
-                    _result = this.eth.avail;
+                    if (this.eth != null)
+                        _result = this.eth.avail;
                     break;
                 case "ETC":
-                    _result = this.etc.avail;
+                    if (this.etc != null)
+                        _result = this.etc.avail;
                     break;
                 case "KRW":
-                    _result = this.krw.avail;
+                    if (this.krw != null)
+                        _result = this.krw.avail;
                     break;
             }
 
             return _result;
         }
+    }
+
+    public class DailyBalanceData
+    {
+        /// <summary>
+        /// Timestamp
+        /// </summary>
+        public long timestamp;
+
+        /// <summary>
+        /// Overall balance's value in KRW.
+        /// </summary>
+        public decimal value
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// KRW balance. 
+        /// </summary>
+        public decimal krw
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// BTC balance. 
+        /// </summary>
+        public decimal btc
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// ETH balance. 
+        /// </summary>
+        public decimal eth
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// ETC balance. 
+        /// </summary>
+        public decimal etc
+        {
+            get;
+            set;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class UserDailyBalance : CApiResult
+    {
+        /// <summary>
+        /// Daily balance's information.
+        /// </summary>
+        public List<DailyBalanceData> dailyBalance
+        {
+            get;
+            set;
+        }
+
     }
 }
